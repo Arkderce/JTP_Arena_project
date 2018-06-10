@@ -114,7 +114,6 @@ public class Arena {
         });
 
         theStage.setOnKeyPressed(event -> {
-        //    System.out.println(event.getCode());
             if(health > 0) {
                 switch (event.getCode()) {
                     case W:
@@ -136,7 +135,6 @@ public class Arena {
             }
         });
             theStage.setOnKeyReleased(event -> {
-            //    System.out.println(event.getCode());
                 if (health > 0) {
                     switch (event.getCode()) {
                         case W:
