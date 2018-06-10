@@ -23,8 +23,8 @@ public class Targets {
     public void targetHit(int id){
         targetsHealth.put(id, targetsHealth.get(id) - 10);
         if(targetsHealth.get(id) <= 0){
-            deleteTarget(id);
             arenaController.writeOut("You killed target nr " + id);
+            deleteTarget(id);
         }else{
             arenaController.writeOut("You hit target nr " + id);
         }

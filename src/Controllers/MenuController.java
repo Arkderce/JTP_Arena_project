@@ -17,6 +17,7 @@ public class MenuController {
     double y = 0;
 
     private MainController mainController;
+    private ArenaController arenaController;
 
     @FXML
     Button button1;
@@ -37,7 +38,7 @@ public class MenuController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        mainController.setMainAnchorPane(anchorPane);
+        mainController.setMainGroup(anchorPane);
     }
     @FXML
     void pressed(MouseEvent event) {

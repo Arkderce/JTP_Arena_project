@@ -2,9 +2,11 @@ package Controllers;
 
 import Arena.Arena;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
@@ -36,6 +38,16 @@ public class ArenaController {
     @FXML
     ProgressBar progressBarArmor;
 
+    @FXML
+    public Button button;
+
+    @FXML
+    void pressButton(ActionEvent event) {
+        Platform.exit();
+    }
+
+    MainController mainController;
+
     private Arena arena = new Arena();
     /**
      * Initializes controller and binds it to the arena.
@@ -45,6 +57,7 @@ public class ArenaController {
         arena.start(canvas, anchorPane);
         canvas.setFocusTraversable(true);
         progressBarHealth.setProgress(arena.getHealth()*0.01);
+        textArea.setEditable(false);
     }
 
     /**
@@ -102,5 +115,9 @@ public class ArenaController {
      */
     public void setPoints(int value){
         points.setText(String.valueOf(value));
+    }
+
+    public void setMainController(MainController mainController) {
+        this.mainController = mainController;
     }
 }

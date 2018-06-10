@@ -2,6 +2,7 @@ package Controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -9,7 +10,7 @@ import java.io.IOException;
 public class MainController {
 
     @FXML
-    AnchorPane mainAnchorPane;
+    Group mainGroup;
 
     @FXML
     public void initialize(){
@@ -24,13 +25,13 @@ public class MainController {
         }
         MenuController menuController = loader.getController();
         menuController.setMainController(this);
-        setMainAnchorPane(anchorPane);
-        mainAnchorPane.getStylesheets().add(css);
+        setMainGroup(anchorPane);
+        mainGroup.getStylesheets().add(css);
     }
 
-    public void setMainAnchorPane(AnchorPane anchorPane){
-        mainAnchorPane.getChildren().clear();
-        mainAnchorPane.getStylesheets().clear();
-        mainAnchorPane.getChildren().add(anchorPane);
+    public void setMainGroup(AnchorPane anchorPane){
+        mainGroup.getChildren().clear();
+        mainGroup.getStylesheets().clear();
+        mainGroup.getChildren().add(anchorPane);
     }
 }

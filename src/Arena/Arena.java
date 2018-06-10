@@ -61,6 +61,7 @@ public class Arena {
      * @param armor current armor value
      */
     public void setArmor(int armor) {
+        if(armor != 100) arenaController.writeOut("You have been hit for : " + (int)(getArmor() - armor) + " armor");
         this.armor = armor;
         arenaController.changeArmor(armor);
     }
@@ -79,6 +80,7 @@ public class Arena {
      * @param health current health value
      */
     public void setHealth(double health) {
+        arenaController.writeOut("You have been hit for : " + (int)(getHealth() - health) + " health");
         this.health = health;
         arenaController.changeHealth(health);
     }
@@ -152,27 +154,27 @@ public class Arena {
                 }
             }
         });
-            theStage.setOnKeyReleased(event -> {
-                if (health > 0) {
-                    switch (event.getCode()) {
-                        case W:
-                            goNorth = false;
-                            break;
-                        case S:
-                            goSouth = false;
-                            break;
-                        case A:
-                            goWest = false;
-                            break;
-                        case D:
-                            goEast = false;
-                            break;
-                        case SHIFT:
-                            running = false;
-                            break;
-                    }
+        theStage.setOnKeyReleased(event -> {
+            if (health > 0) {
+                switch (event.getCode()) {
+                    case W:
+                        goNorth = false;
+                        break;
+                    case S:
+                        goSouth = false;
+                        break;
+                    case A:
+                        goWest = false;
+                        break;
+                    case D:
+                        goEast = false;
+                        break;
+                    case SHIFT:
+                        running = false;
+                        break;
                 }
-            });
+            }
+        });
 
 
         final long startNanoTime = System.nanoTime();
@@ -211,6 +213,8 @@ public class Arena {
                 }
                 else {
                     gc.drawImage( gameover, 370, 350);
+                    arenaController.button.setDisable(false);
+                    arenaController.button.setManaged(true);
                 }
                 drawWalls(gc);
 
@@ -365,11 +369,6 @@ public class Arena {
         return isWithinA;
     }
 
-    /**
-     * Sets controller for GUI manipulation.
-     *
-     * @param arenaController controller given to set.
-     */
     public void setController(ArenaController arenaController) {
         this.arenaController = arenaController;
     }
