@@ -48,7 +48,7 @@ public class ArenaController {
     }
 
     /**
-     * Writes out message on game log.
+     * Writes out message with current timestamp on game log.
      *
      * @param msg message for display
      */
