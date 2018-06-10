@@ -37,7 +37,9 @@ public class ArenaController {
     ProgressBar progressBarArmor;
 
     private Arena arena = new Arena();
-
+    /**
+     * Initializes controller and binds it to the arena.
+     */
     public void initialize() {
         arena.setController(this);
         arena.start(canvas, anchorPane);
@@ -45,7 +47,11 @@ public class ArenaController {
         progressBarHealth.setProgress(arena.getHealth()*0.01);
     }
 
-
+    /**
+     * Writes out message on game log.
+     *
+     * @param msg message for display
+     */
     public void writeOut(String msg) {
         Platform.runLater(() -> {
             textArea.setText(textArea.getText() + "[" + new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime()) + "] " + msg + "\n");
@@ -53,6 +59,11 @@ public class ArenaController {
         });
     }
 
+    /**
+     * Updates GUI healthbar.
+     *
+     * @param value current players health
+     */
     public void changeHealth(double value) {
         Platform.runLater(() -> {
         if (value >= 0 && value <= 100) {
@@ -62,6 +73,11 @@ public class ArenaController {
         });
     }
 
+    /**
+     * Updates GUI armorbar.
+     *
+     * @param value current players armor
+     */
     public void changeArmor(int value) {
         Platform.runLater(() -> {
         if (value >= 0 && value <= 100) {
@@ -70,10 +86,20 @@ public class ArenaController {
         });
     }
 
+    /**
+     * Updates GUI level.
+     *
+     * @param value current level
+     */
     public void setLevel(int value){
         level.setText(String.valueOf(value));
     }
 
+    /**
+     * Updates GUI points.
+     *
+     * @param value current points
+     */
     public void setPoints(int value){
         points.setText(String.valueOf(value));
     }

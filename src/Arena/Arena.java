@@ -47,20 +47,37 @@ public class Arena {
     double oldT = 0;
     double level = 0;
 
-
+    /**
+     * Returns current armor value.
+     *
+     */
     public int getArmor() {
         return armor;
     }
 
+    /**
+     * Sets current armor value.
+     *
+     * @param armor current armor value
+     */
     public void setArmor(int armor) {
         this.armor = armor;
         arenaController.changeArmor(armor);
     }
 
+    /**
+     * Returns current health value.
+     *
+     */
     public double getHealth() {
         return health;
     }
 
+    /**
+     * Sets current health value.
+     *
+     * @param health current health value
+     */
     public void setHealth(double health) {
         this.health = health;
         arenaController.changeHealth(health);
@@ -348,6 +365,11 @@ public class Arena {
         return isWithinA;
     }
 
+    /**
+     * Sets controller for GUI manipulation.
+     *
+     * @param arenaController controller given to set.
+     */
     public void setController(ArenaController arenaController) {
         this.arenaController = arenaController;
     }
