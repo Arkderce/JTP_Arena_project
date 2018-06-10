@@ -10,6 +10,7 @@ public class Targets {
     public int targetId = 0;
     HashMap<Integer, List<Double>> targetsPos = new HashMap<Integer, List<Double>>();
     HashMap<Integer, Double> targetsHealth = new HashMap<Integer, Double>();
+    int points = 0;
 
 
 
@@ -23,26 +24,16 @@ public class Targets {
         targetsHealth.put(id, targetsHealth.get(id) - 10);
         if(targetsHealth.get(id) <= 0){
             deleteTarget(id);
-            arenaController.writeOut("You kill target nr " + id);
+            arenaController.writeOut("You killed target nr " + id);
         }else{
             arenaController.writeOut("You hit target nr " + id);
         }
     }
 
     public void deleteTarget(int id){
+        arenaController.setPoints(++points);
         targetsPos.remove(id);
         targetsHealth.remove(id);
-    }
-
-    public void deleteTargets(){
-        int size = targetsPos.size();
-        for (int i = 0; i < size; i++) {
-            targetsPos.remove(i);
-        }
-        size = targetsHealth.size();
-        for(int i = 0; i < size; i++){
-            targetsHealth.remove(i);
-        }
     }
 
     public HashMap<Integer, List<Double>> returnTargetsPos(){

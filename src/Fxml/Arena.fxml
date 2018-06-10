@@ -7,14 +7,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ArenaController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ArenaController">
    <children>
       <Canvas fx:id="canvas" height="800.0" layoutX="114.0" layoutY="114.0" width="1200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <TextArea fx:id="textArea" layoutX="114.0" layoutY="700.0" prefHeight="100.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
+      <TextArea fx:id="textArea" layoutX="114.0" layoutY="700.0" prefHeight="100.0" prefWidth="684.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
       <AnchorPane fx:id="anchorPane" layoutX="967.0" layoutY="553.0" prefHeight="100.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <ProgressBar fx:id="progressBarHealth" layoutX="50.0" layoutY="29.0" prefWidth="200.0" progress="0.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="35.0" />
-            <ProgressBar fx:id="progressBarArmor" layoutX="50.0" layoutY="63.0" prefWidth="200.0" progress="0.0" AnchorPane.topAnchor="85.0" />
+            <ProgressBar fx:id="progressBarHealth" layoutX="50.0" layoutY="21.0" prefWidth="200.0" progress="0.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="21.0" />
+            <ProgressBar fx:id="progressBarArmor" layoutX="50.0" layoutY="73.0" prefWidth="200.0" progress="0.0" AnchorPane.topAnchor="73.0" />
             <Text layoutX="108.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Health" textAlignment="CENTER" wrappingWidth="65.5972900390625" AnchorPane.leftAnchor="114.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="5.0">
                <font>
                   <Font name="System Bold" size="14.0" />
@@ -27,5 +27,25 @@
             </Text>
          </children>
       </AnchorPane>
+      <Text layoutX="742.0" layoutY="833.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level: ">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Text>
+      <Text fx:id="level" layoutX="850.0" layoutY="832.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Text>
+      <Text layoutX="742.0" layoutY="879.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Points:">
+         <font>
+            <Font size="31.0" />
+         </font>
+      </Text>
+      <Text fx:id="points" layoutX="851.0" layoutY="879.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+         <font>
+            <Font size="31.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

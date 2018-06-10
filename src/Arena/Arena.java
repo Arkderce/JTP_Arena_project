@@ -37,6 +37,7 @@ public class Arena {
     int numberOfMaxTargets = 10;
     int currentNumOfTargets = 0;
     int armor = 100;
+    int levelDisplay = 1;
     double health = 100;
     double posX = 600;
     double posY = 400;
@@ -199,6 +200,7 @@ public class Arena {
 
                 if(targetsPos.size() == 0){
                     currentNumOfTargets = 0;
+                    arenaController.setLevel(levelDisplay++);
                     Random rand = new Random();
                     numberOfMaxTargets = rand.nextInt(20) + 5;
                     setArmor(100);
