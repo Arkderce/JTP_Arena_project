@@ -1,0 +1,35 @@
+.back{
+    -fx-background-image:url('menu.jpg');
+    -fx-background-size: stretch;
+}
+.button1{
+    -fx-background-color:transparent;
+    -fx-text-fill: white;
+    -fx-border-width: 0px 0px 2px 0px;
+    -fx-border-color: white;
+    -fx-font-family: Quicksand;
+    -fx-font-size: 2.4em;
+    -fx-opacity: 0.6;
+}
+.button2{
+    -fx-background-color:transparent;
+    -fx-text-fill: white;
+    -fx-border-width: 0px 0px 2px 0px;
+    -fx-border-color: white;
+    -fx-font-family: Quicksand;
+    -fx-font-size: 2.4em;
+    -fx-opacity: 0.6;
+}
+.button1:hover{
+
+    -fx-opacity: 5;
+}
+.button2:hover{
+    -fx-opacity: 5;
+}
+.button1:pressed{
+    -fx-opacity: 0.6;
+}
+.button2:pressed{
+    -fx-opacity: 0.6;
+}
