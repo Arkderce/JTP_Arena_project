@@ -8,6 +8,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -16,6 +17,12 @@ public class ArenaController {
 
     @FXML
     public Canvas canvas;
+
+    @FXML
+    public Text level;
+
+    @FXML
+    public Text points;
 
     @FXML
     TextArea textArea;
@@ -61,5 +68,13 @@ public class ArenaController {
             progressBarArmor.setProgress(value*0.01);
         }
         });
+    }
+
+    public void setLevel(int value){
+        level.setText(String.valueOf(value));
+    }
+
+    public void setPoints(int value){
+        points.setText(String.valueOf(value));
     }
 }
