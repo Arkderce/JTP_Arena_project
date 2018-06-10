@@ -32,9 +32,10 @@ public class Arena {
     private Image crosshair;
     private Image gameover;
     private Image background;
+    private Image wall;
 
     int numberOfMaxTargets = 10;
-    int curretNumOfTargets = 0;
+    int currentNumOfTargets = 0;
     double posX = 600;
     double posY = 400;
     double mposX = 0;
@@ -45,10 +46,14 @@ public class Arena {
 
     HashMap<Integer, List<Double>> bullets = new HashMap<Integer, List<Double>>();
     HashMap<Integer, List<Double>> targetsPos = new HashMap<Integer, List<Double>>();
+    HashMap<Integer, List<Double>> wallsPos = new HashMap<Integer, List<Double>>();
+    HashMap<Integer, Double> targetsHealth = new HashMap<Integer, Double>();
 
     Bullets oBullets = new Bullets();
     Targets oTargets = new Targets();
+    Walls oWalls = new Walls();
     ArenaController arenaController;
+
 
     public void start(Canvas theStage, AnchorPane anchorPane){
 
@@ -63,6 +68,7 @@ public class Arena {
             bulletOwn = new Image(getClass().getResource("/resources/bulletown.png").toURI().toString());
             crosshair = new Image(getClass().getResource("/resources/crosshair.png").toURI().toString());
             gameover = new Image(getClass().getResource("/resources/gameover.png").toURI().toString());
+            wall = new Image(getClass().getResource("/resources/wall.png").toURI().toString());
         } catch(Exception e){
         }
 
@@ -165,16 +171,22 @@ public class Arena {
 
                 }
 
-                if(curretNumOfTargets < numberOfMaxTargets) {
+                if(targetsPos.size() == 0){
+                    currentNumOfTargets = 0;
                     Random rand = new Random();
-                    int rX = rand.nextInt(1200) + 1;
-                    int rY = rand.nextInt(1200) + 1;
-                    while(isWithinAcceptableBounds(rX, rY)){
-                        rX = rand.nextInt(1200) + 1;
-                        rY = rand.nextInt(1200) + 1;
+                    numberOfMaxTargets = rand.nextInt(20) + 5;
+                }
+
+                if(currentNumOfTargets < numberOfMaxTargets) {
+                    Random rand = new Random();
+                    int rX = rand.nextInt(1100) + 1;
+                    int rY = rand.nextInt(700) + 1;
+                    while(!isWithinAcceptableBounds(rX, rY)){
+                        rX = rand.nextInt(1150) + 1;
+                        rY = rand.nextInt(750) + 1;
                     }
-                    oTargets.addTarget(rX, rY);
-                    curretNumOfTargets++;
+                    oTargets.addTarget(rX, rY, 20);
+                    currentNumOfTargets++;
                 }
                 //drawEnemyGuns(gc);
 
@@ -182,7 +194,9 @@ public class Arena {
                 drawTargets(gc);
 
 
-                oBullets.moveBullets(targetsPos);
+
+
+                oBullets.moveBullets(oTargets);
                 bullets = oBullets.returnBullets();
                 drawBullets(gc);
 
@@ -241,8 +255,25 @@ public class Arena {
     }
 
     private boolean isWithinAcceptableBounds(double x, double y){
-        boolean isWithin = false;
-        return isWithin;
+        boolean isWithinA = true;
+        if(x >= Wi || x <= 0 || y >= He || y <= 0){
+            isWithinA = false;
+        }
+
+        if((x >= posX - 100 && x <= posX + 200) && (y >= posY - 100 && y <= posY + 200)){
+            isWithinA = false;
+        }
+
+        targetsPos = oTargets.returnTargetsPos();
+        for (Integer targetId : targetsPos.keySet()) {
+            List<Double> targetSpecs = targetsPos.get(targetId);
+            Double pX = targetSpecs.get(0);
+            Double pY = targetSpecs.get(1);
+            if((x >= pX - 100 && x <= pX + 200) && (y >= pY - 100 && y <= pY + 200)){
+                isWithinA = false;
+            }
+        }
+        return isWithinA;
     }
 
     public void setController(ArenaController arenaController) {
