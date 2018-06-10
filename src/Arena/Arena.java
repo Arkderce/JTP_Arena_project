@@ -56,7 +56,7 @@ public class Arena {
 
 
     public void start(Canvas theStage, AnchorPane anchorPane){
-
+//xD
         GraphicsContext gc = theStage.getGraphicsContext2D();
 
         try {
