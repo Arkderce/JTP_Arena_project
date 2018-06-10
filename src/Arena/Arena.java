@@ -36,6 +36,7 @@ public class Arena {
 
     int numberOfMaxTargets = 10;
     int currentNumOfTargets = 0;
+    int armour = 100;
     double posX = 600;
     double posY = 400;
     double mposX = 0;
@@ -44,6 +45,15 @@ public class Arena {
     double oldT = 0;
     double level = 0;
 
+
+    public int getArmour() {
+        return armour;
+    }
+
+    public void setArmour(int armour) {
+        this.armour = armour;
+        arenaController.changeArmour(armour);
+    }
 
     public double getHealth() {
         return health;
@@ -192,6 +202,7 @@ public class Arena {
                     currentNumOfTargets = 0;
                     Random rand = new Random();
                     numberOfMaxTargets = rand.nextInt(20) + 5;
+                    setArmour(100);
                     if(level < 2.5) level += 0.5;
                 }
 

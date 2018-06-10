@@ -66,7 +66,11 @@ public class Bullets {
         }
 
         if((bX >= posX && bX <= posX + 40) && (bY >= posY && bY <= posY + 40) && clientB != 1){
-            arena.setHealth(arena.getHealth()-10);
+            if(arena.getArmour() > 0){
+                arena.setHealth(arena.getHealth()-5);
+                arena.setArmour(arena.getArmour()-25);
+            }
+            else arena.setHealth(arena.getHealth()-10);
             didInteract = true;
         }
 
