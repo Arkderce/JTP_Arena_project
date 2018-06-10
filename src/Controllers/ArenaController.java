@@ -35,9 +35,9 @@ public class ArenaController {
         arena.setController(this);
         arena.start(canvas, anchorPane);
         canvas.setFocusTraversable(true);
-
-
+        progressBarHealth.setProgress(arena.getHealth());
     }
+
 
     public void writeOut(String msg) {
         Platform.runLater(() -> {

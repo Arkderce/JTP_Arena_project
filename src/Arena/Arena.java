@@ -41,6 +41,16 @@ public class Arena {
     double mposX = 0;
     double mposY = 0;
     double angle = 0;
+
+    public double getHealth() {
+        return health;
+    }
+
+    public void setHealth(double health) {
+        this.health = health;
+        arenaController.changeHealth((int) health);
+    }
+
     double health = 100;
     boolean running, goNorth, goSouth, goEast, goWest;
 
@@ -202,6 +212,7 @@ public class Arena {
                 drawBullets(gc);
 
                 if(dx != 0 || dy != 0) movePlayer(dx, dy);
+
             }
         }.start();
     }
