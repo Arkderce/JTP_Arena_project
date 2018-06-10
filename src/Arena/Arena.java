@@ -41,6 +41,9 @@ public class Arena {
     double mposX = 0;
     double mposY = 0;
     double angle = 0;
+    double oldT = 0;
+    double level = 0;
+
 
     public double getHealth() {
         return health;
@@ -59,7 +62,7 @@ public class Arena {
     HashMap<Integer, List<Double>> wallsPos = new HashMap<Integer, List<Double>>();
     HashMap<Integer, Double> targetsHealth = new HashMap<Integer, Double>();
 
-    Bullets oBullets = new Bullets();
+    Bullets oBullets = new Bullets(this);
     Targets oTargets = new Targets();
     Walls oWalls = new Walls();
     ArenaController arenaController;
@@ -83,6 +86,8 @@ public class Arena {
             e.printStackTrace();
         }
 
+        oWalls.createWalls(Wi, He);
+        wallsPos = oWalls.returnWalls();
 
         theStage.setOnMouseMoved(event -> {
             if(health > 0) {
@@ -93,7 +98,6 @@ public class Arena {
 
         theStage.setOnMousePressed(event -> {
             if(health > 0) {
-                //connectorClient.changeStr("PLAYER:SHOOT:" + (posX + 17) + ":" + (posY + 17) + ":" + angle);
                 oBullets.createBullet(myId, posX+17, posY+17, angle);
             }
         });
@@ -143,13 +147,14 @@ public class Arena {
                 }
             });
 
-        final long startNanoTime = System.nanoTime();
 
+        final long startNanoTime = System.nanoTime();
         new AnimationTimer()
         {
             public void handle(long currentNanoTime)
             {
                 double t = (currentNanoTime - startNanoTime) / 1000000000.0;
+
 
                 double x = 232 + 128 * Math.cos(t);
                 double y = 232 + 128 * Math.sin(t);
@@ -178,17 +183,19 @@ public class Arena {
                     gc.drawImage( crosshair , (posX + 17) + vectorX * 100, (posY + 17) + vectorY * 100);
                 }
                 else {
-                    gc.drawImage( gameover, 350, 450);
-
+                    gc.drawImage( gameover, 370, 350);
                 }
+                drawWalls(gc);
+
 
                 if(targetsPos.size() == 0){
                     currentNumOfTargets = 0;
                     Random rand = new Random();
                     numberOfMaxTargets = rand.nextInt(20) + 5;
+                    if(level < 2.5) level += 0.5;
                 }
 
-                if(currentNumOfTargets < numberOfMaxTargets) {
+                while(currentNumOfTargets < numberOfMaxTargets) {
                     Random rand = new Random();
                     int rX = rand.nextInt(1100) + 1;
                     int rY = rand.nextInt(700) + 1;
@@ -199,15 +206,15 @@ public class Arena {
                     oTargets.addTarget(rX, rY, 20);
                     currentNumOfTargets++;
                 }
-                //drawEnemyGuns(gc);
 
                 targetsPos = oTargets.returnTargetsPos();
                 drawTargets(gc);
 
-
-
-
-                oBullets.moveBullets(oTargets);
+                if(t + level >= oldT + 3.00){
+                    oldT = t;
+                    createEnemyBullets();
+                }
+                oBullets.moveBullets(oTargets, oWalls, posX, posY);
                 bullets = oBullets.returnBullets();
                 drawBullets(gc);
 
@@ -235,6 +242,17 @@ public class Arena {
         gc.restore();
     }
 
+    private void createEnemyBullets(){
+        for(Integer targetId : targetsPos.keySet()){
+            List<Double> targetSpecs = targetsPos.get(targetId);
+            Double pX = targetSpecs.get(0);
+            Double pY = targetSpecs.get(1);
+            Random rand = new Random();
+            int ang = rand.nextInt(360) + 1;
+            oBullets.createBullet(2, pX+17, pY+17, ang);
+        }
+    }
+
     private void drawBullets(GraphicsContext gc){
         for(Integer bullet : bullets.keySet()){
             List<Double> bulletSpecs = bullets.get(bullet);
@@ -251,6 +269,12 @@ public class Arena {
         }
     }
 
+    private void drawWalls(GraphicsContext gc){
+        for (Integer key : wallsPos.keySet()) {
+            gc.drawImage( wall , wallsPos.get(key).get(0), wallsPos.get(key).get(1) );
+        }
+    }
+
     private void drawTargets(GraphicsContext gc){
         for (Integer key : targetsPos.keySet()) {
             gc.drawImage( target , targetsPos.get(key).get(0), targetsPos.get(key).get(1) );
@@ -260,9 +284,22 @@ public class Arena {
     private void movePlayer(double x, double y){
         double newposX = x+posX;
         double newposY = y+posY;
+        boolean obstacleOnPath = false;
         if(newposX <= Wi-40 && newposX >= 0 && newposY <= He-40 && newposY >= 0){
-            posY = newposY;
-            posX = newposX;
+            for(Integer wallId : wallsPos.keySet()){
+                List<Double> wallSpecs = wallsPos.get(wallId);
+                Double pX = wallSpecs.get(0);
+                Double pY = wallSpecs.get(1);
+                if((newposX >= pX - 40 && newposX <= pX + 40 ) && (newposY >= pY - 40 && newposY <= pY + 40 )){
+                    obstacleOnPath = true;
+                }
+            }
+
+            if(!obstacleOnPath){
+                posY = newposY;
+                posX = newposX;
+            }
+
         }
     }
 
@@ -285,6 +322,17 @@ public class Arena {
                 isWithinA = false;
             }
         }
+
+        wallsPos = oWalls.returnWalls();
+        for (Integer wallId : wallsPos.keySet()) {
+            List<Double> wallSpecs = wallsPos.get(wallId);
+            Double pX = wallSpecs.get(0);
+            Double pY = wallSpecs.get(1);
+            if((x >= pX - 40 && x <= pX + 80) && (y >= pY - 40 && y <= pY + 80)){
+                isWithinA = false;
+            }
+        }
+
         return isWithinA;
     }
 
