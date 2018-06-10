@@ -70,6 +70,7 @@ public class Arena {
             gameover = new Image(getClass().getResource("/resources/gameover.png").toURI().toString());
             wall = new Image(getClass().getResource("/resources/wall.png").toURI().toString());
         } catch(Exception e){
+            e.printStackTrace();
         }
 
 
