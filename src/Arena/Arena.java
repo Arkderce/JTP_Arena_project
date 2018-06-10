@@ -36,7 +36,8 @@ public class Arena {
 
     int numberOfMaxTargets = 10;
     int currentNumOfTargets = 0;
-    int armour = 100;
+    int armor = 100;
+    double health = 100;
     double posX = 600;
     double posY = 400;
     double mposX = 0;
@@ -46,13 +47,13 @@ public class Arena {
     double level = 0;
 
 
-    public int getArmour() {
-        return armour;
+    public int getArmor() {
+        return armor;
     }
 
-    public void setArmour(int armour) {
-        this.armour = armour;
-        arenaController.changeArmour(armour);
+    public void setArmor(int armor) {
+        this.armor = armor;
+        arenaController.changeArmor(armor);
     }
 
     public double getHealth() {
@@ -61,10 +62,9 @@ public class Arena {
 
     public void setHealth(double health) {
         this.health = health;
-        arenaController.changeHealth((int) health);
+        arenaController.changeHealth(health);
     }
 
-    double health = 100;
     boolean running, goNorth, goSouth, goEast, goWest;
 
     HashMap<Integer, List<Double>> bullets = new HashMap<Integer, List<Double>>();
@@ -81,6 +81,7 @@ public class Arena {
     public void start(Canvas theStage, AnchorPane anchorPane){
 
         GraphicsContext gc = theStage.getGraphicsContext2D();
+        oTargets.setController(arenaController);
 
         try {
             background = new Image(getClass().getResource("/resources/background.png").toURI().toString());
@@ -113,7 +114,6 @@ public class Arena {
         });
 
         theStage.setOnKeyPressed(event -> {
-            System.out.println(event.getCode());
             if(health > 0) {
                 switch (event.getCode()) {
                     case W:
@@ -135,7 +135,6 @@ public class Arena {
             }
         });
             theStage.setOnKeyReleased(event -> {
-                System.out.println(event.getCode());
                 if (health > 0) {
                     switch (event.getCode()) {
                         case W:
@@ -202,7 +201,7 @@ public class Arena {
                     currentNumOfTargets = 0;
                     Random rand = new Random();
                     numberOfMaxTargets = rand.nextInt(20) + 5;
-                    setArmour(100);
+                    setArmor(100);
                     if(level < 2.5) level += 0.5;
                 }
 

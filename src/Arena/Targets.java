@@ -1,9 +1,12 @@
 package Arena;
+import Controllers.ArenaController;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
 public class Targets {
+    ArenaController arenaController;
     public int targetId = 0;
     HashMap<Integer, List<Double>> targetsPos = new HashMap<Integer, List<Double>>();
     HashMap<Integer, Double> targetsHealth = new HashMap<Integer, Double>();
@@ -18,7 +21,12 @@ public class Targets {
 
     public void targetHit(int id){
         targetsHealth.put(id, targetsHealth.get(id) - 10);
-        if(targetsHealth.get(id) <= 0) deleteTarget(id);
+        if(targetsHealth.get(id) <= 0){
+            deleteTarget(id);
+            arenaController.writeOut("You kill target nr " + id);
+        }else{
+            arenaController.writeOut("You hit target nr " + id);
+        }
     }
 
     public void deleteTarget(int id){
@@ -41,4 +49,8 @@ public class Targets {
         return targetsPos;
     }
     public HashMap<Integer, Double> returnTargetsHealth(){ return targetsHealth; }
+    public void setController(ArenaController arenaController) {
+        this.arenaController = arenaController;
+    }
+
 }

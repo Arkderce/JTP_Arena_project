@@ -35,29 +35,31 @@ public class ArenaController {
         arena.setController(this);
         arena.start(canvas, anchorPane);
         canvas.setFocusTraversable(true);
-        progressBarHealth.setProgress(arena.getHealth());
+        progressBarHealth.setProgress(arena.getHealth()*0.01);
     }
 
 
     public void writeOut(String msg) {
         Platform.runLater(() -> {
             textArea.setText(textArea.getText() + "[" + new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime()) + "] " + msg + "\n");
+            textArea.setScrollTop(Double.MAX_VALUE);
         });
     }
 
-    public void changeHealth(int value) {
-        if (value >= -100 && value <= 100) {
-            progressBarHealth.setProgress(progressBarHealth.getProgress() + value); //KAMIL DAWAJ KOT TO LADNIEJ BD Z LISTENEREM I WOGULE
+    public void changeHealth(double value) {
+        Platform.runLater(() -> {
+        if (value >= 0 && value <= 100) {
+            progressBarHealth.setProgress(value*0.01);
+
         }
-    }
-
-    public void changeArmour(int value){
-
+        });
     }
 
     public void changeArmor(int value) {
-        if (value >= -100 && value <= 100) {
-            progressBarArmor.setProgress(progressBarArmor.getProgress() + value); //KAMIL DAWAJ KOT TO LADNIEJ BD Z LISTENEREM I WOGULE
+        Platform.runLater(() -> {
+        if (value >= 0 && value <= 100) {
+            progressBarArmor.setProgress(value*0.01);
         }
+        });
     }
 }
