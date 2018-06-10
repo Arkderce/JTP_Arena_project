@@ -51,6 +51,10 @@ public class ArenaController {
         }
     }
 
+    public void changeArmour(int value){
+
+    }
+
     public void changeArmor(int value) {
         if (value >= -100 && value <= 100) {
             progressBarArmor.setProgress(progressBarArmor.getProgress() + value); //KAMIL DAWAJ KOT TO LADNIEJ BD Z LISTENEREM I WOGULE
