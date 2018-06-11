@@ -41,6 +41,9 @@ public class ArenaController {
     @FXML
     public Button button;
 
+    /**
+     *Quits game.
+     */
     @FXML
     void pressButton(ActionEvent event) {
         Platform.exit();
@@ -82,6 +85,8 @@ public class ArenaController {
         if (value >= 0 && value <= 100) {
             progressBarHealth.setProgress(value*0.01);
 
+        } else {
+            progressBarHealth.setProgress(0);
         }
         });
     }
@@ -117,7 +122,4 @@ public class ArenaController {
         points.setText(String.valueOf(value));
     }
 
-    public void setMainController(MainController mainController) {
-        this.mainController = mainController;
-    }
 }

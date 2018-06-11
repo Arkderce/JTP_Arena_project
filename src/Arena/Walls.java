@@ -8,6 +8,7 @@ public class Walls {
     HashMap<Integer, List<Double>> wallsPos = new HashMap<Integer, List<Double>>();
     private int wallId = 0;
 
+
     public void createWalls(double x, double y){
         addWall(x/2 - 100, y/2 - 100);
         addWall(x/2 - 60, y/2 - 100);
@@ -73,11 +74,20 @@ public class Walls {
         addWall(x-200 + 100, y-300 + 60);
     }
 
+    /**
+     * Adds wall on given coordinates.
+     *
+     * @param x wall x-position
+     * @param y wall y-position
+     */
     public void addWall(double x, double y){
         wallsPos.put(wallId, Arrays.asList(x, y));
         wallId++;
     }
 
+    /**
+     * @return hashmap of walls position
+     */
     public HashMap<Integer, List<Double>> returnWalls(){
         return wallsPos;
     }

@@ -29,6 +29,11 @@ public class MainController {
         mainGroup.getStylesheets().add(css);
     }
 
+    /**
+     * Sets main group for application GUI.
+     *
+     * @param anchorPane witch holds whole interface.
+     */
     public void setMainGroup(AnchorPane anchorPane){
         mainGroup.getChildren().clear();
         mainGroup.getStylesheets().clear();

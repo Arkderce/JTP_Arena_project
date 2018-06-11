@@ -24,11 +24,17 @@ public class MenuController {
 
     @FXML
     Button button2;
+
+    /**
+     * Quits game.
+     */
     @FXML
     void exit(ActionEvent event) {
         Platform.exit();
     }
-
+    /**
+     * Loads main game screen.
+     */
     @FXML
     void play(ActionEvent event) {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/Fxml/Arena.fxml"));
@@ -53,6 +59,9 @@ public class MenuController {
         stage.setY(event.getScreenY() - y);
     }
 
+    /**
+     * Sets controller for GUI manipulation.
+     */
     public void setMainController(MainController mainController) {
         this.mainController = mainController;
     }

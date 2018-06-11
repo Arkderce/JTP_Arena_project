@@ -61,9 +61,12 @@ public class Arena {
      * @param armor current armor value
      */
     public void setArmor(int armor) {
-        if(armor != 100) arenaController.writeOut("You have been hit for : " + (int)(getArmor() - armor) + " armor");
-        this.armor = armor;
-        arenaController.changeArmor(armor);
+        if(health>0) {
+            if (armor != 100)
+                arenaController.writeOut("You have been hit for : " + (int) (getArmor() - armor) + " armor");
+            this.armor = armor;
+            arenaController.changeArmor(armor);
+        }
     }
 
     /**
@@ -80,9 +83,11 @@ public class Arena {
      * @param health current health value
      */
     public void setHealth(double health) {
-        arenaController.writeOut("You have been hit for : " + (int)(getHealth() - health) + " health");
-        this.health = health;
-        arenaController.changeHealth(health);
+        if(health>0) {
+            arenaController.writeOut("You have been hit for : " + (int) (getHealth() - health) + " health");
+        }
+            this.health = health;
+            arenaController.changeHealth(health);
     }
 
     boolean running, goNorth, goSouth, goEast, goWest;
@@ -119,6 +124,7 @@ public class Arena {
 
         oWalls.createWalls(Wi, He);
         wallsPos = oWalls.returnWalls();
+
 
         theStage.setOnMouseMoved(event -> {
             if(health > 0) {
@@ -314,6 +320,12 @@ public class Arena {
         }
     }
 
+    /**
+     * Moves player by given coordinates.
+     *
+     * @param x value added to x position
+     * @param y value added to y position
+     */
     private void movePlayer(double x, double y){
         double newposX = x+posX;
         double newposY = y+posY;
@@ -369,6 +381,9 @@ public class Arena {
         return isWithinA;
     }
 
+    /**
+     * Sets controller for GUI manipulation.
+     */
     public void setController(ArenaController arenaController) {
         this.arenaController = arenaController;
     }
