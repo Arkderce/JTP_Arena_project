@@ -8,7 +8,13 @@ public class Walls {
     HashMap<Integer, List<Double>> wallsPos = new HashMap<Integer, List<Double>>();
     private int wallId = 0;
 
-
+    /**
+     * Initialization of static walls on map
+     * @param x
+     * Width of arena
+     * @param y
+     * Height of arena
+     */
     public void createWalls(double x, double y){
         addWall(x/2 - 100, y/2 - 100);
         addWall(x/2 - 60, y/2 - 100);
