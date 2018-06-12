@@ -102,7 +102,14 @@ public class Arena {
     Walls oWalls = new Walls();
     ArenaController arenaController;
 
-
+    /**
+     * The main entry point for all JavaFX applications. The start method is called after the init method has returned,
+     * and after the system is ready for the application to begin running.
+     * @param theStage
+     * Primary stage of arena application
+     * @param anchorPane
+     * Primary Pane for arena
+     */
     public void start(Canvas theStage, AnchorPane anchorPane){
 
         GraphicsContext gc = theStage.getGraphicsContext2D();
@@ -186,13 +193,14 @@ public class Arena {
         final long startNanoTime = System.nanoTime();
         new AnimationTimer()
         {
+            /**
+             * GameLoop
+             * @param currentNanoTime
+             * Current Time
+             */
             public void handle(long currentNanoTime)
             {
                 double t = (currentNanoTime - startNanoTime) / 1000000000.0;
-
-
-                double x = 232 + 128 * Math.cos(t);
-                double y = 232 + 128 * Math.sin(t);
 
                 int dx = 0, dy = 0;
 
@@ -263,17 +271,54 @@ public class Arena {
         }.start();
     }
 
+    /**
+     * Count angle between two points
+     * @param spX
+     * Current position X of center for player
+     * @param spY
+     * Current position Y of center for player
+     * @param mpX
+     * Current position X for mouse
+     * @param mpY
+     * Current position Y for mouse
+     * @return
+     * Return angle of sp between cathetus and hypotenuse of rectangular triangle created from sp and mp
+     */
     private double countAngle(double spX, double spY, double mpX, double mpY){
         double xDistance = mpX - spX;
         double yDistance = mpY - spY;
         return Math.toDegrees(Math.atan2(yDistance, xDistance));
     }
 
+    /**
+     * Rotation of image
+     * @param gc
+     * Current graphicscontext
+     * @param angle
+     * Angle at which rotation will occur
+     * @param px
+     * Position X of rotation point
+     * @param py
+     * Position Y of rotation point
+     */
     private void rotate(GraphicsContext gc, double angle, double px, double py) {
         Rotate r = new Rotate(angle, px, py);
         gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
     }
 
+    /**
+     * Draws image that's supposed to rotate
+     * @param gc
+     * Current graphicscontext
+     * @param image
+     * Image to be rotated
+     * @param angle
+     * Angle at which rotation will occur
+     * @param tlpx
+     * Position X of rotation point
+     * @param tlpy
+     * Position Y of rotation point
+     */
     private void drawRotatedImage(GraphicsContext gc, Image image, double angle, double tlpx, double tlpy) {
         gc.save();
         rotate(gc, angle, tlpx + image.getWidth() / 2, tlpy + image.getHeight() / 2);
@@ -281,6 +326,9 @@ public class Arena {
         gc.restore();
     }
 
+    /**
+     * Spawn bullets for every target on arena
+     */
     private void createEnemyBullets(){
         for(Integer targetId : targetsPos.keySet()){
             List<Double> targetSpecs = targetsPos.get(targetId);
@@ -292,6 +340,11 @@ public class Arena {
         }
     }
 
+    /**
+     * Draw currently existing bullets
+     * @param gc
+     * Current graphicscontext
+     */
     private void drawBullets(GraphicsContext gc){
         for(Integer bullet : bullets.keySet()){
             List<Double> bulletSpecs = bullets.get(bullet);
@@ -308,12 +361,22 @@ public class Arena {
         }
     }
 
+    /**
+     * Draw currently existing walls
+     * @param gc
+     * Current graphicscontext
+     */
     private void drawWalls(GraphicsContext gc){
         for (Integer key : wallsPos.keySet()) {
             gc.drawImage( wall , wallsPos.get(key).get(0), wallsPos.get(key).get(1) );
         }
     }
 
+    /**
+     * Draw currently existing targets
+     * @param gc
+     * Current graphicscontext
+     */
     private void drawTargets(GraphicsContext gc){
         for (Integer key : targetsPos.keySet()) {
             gc.drawImage( target , targetsPos.get(key).get(0), targetsPos.get(key).get(1) );
@@ -348,6 +411,15 @@ public class Arena {
         }
     }
 
+    /**
+     * Checks if target that's supposed to spawn wont appear at wall or player
+     * @param x
+     * Position X at which target want's to spawn
+     * @param y
+     * Position Y at which target want's to spawn
+     * @return
+     * True if target can spawn, false if otherwise
+     */
     private boolean isWithinAcceptableBounds(double x, double y){
         boolean isWithinA = true;
         if(x >= Wi || x <= 0 || y >= He || y <= 0){

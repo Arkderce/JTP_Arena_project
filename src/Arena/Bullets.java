@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+
 public class Bullets {
     public int bulletNumber = 1;
     public double x = 1200;
@@ -14,16 +15,48 @@ public class Bullets {
     Arena arena;
     HashMap<Integer, List<Double>> bullets = new HashMap<Integer, List<Double>>();
 
+    /**
+     * Constructor
+     * @param _arena
+     * Arena object that's pointing at place where bullets are going to exist
+     */
     Bullets(Arena _arena){
         arena = _arena;
     }
 
+    /**
+     * Creates a bullet with given set of information
+     * @param ClientId
+     * Decides which object bullet belongs to
+     * @param posX
+     * Starting position X of bullet
+     * @param posY
+     * Starting position Y of bullet
+     * @param angle
+     * Angle refering to starting position at which bullet flies
+     */
     public void createBullet(int ClientId, double posX, double posY, double angle){
         List<Double> temp = new ArrayList<Double>();
         temp.add(posX); temp.add(posY); temp.add(angle); temp.add((double)ClientId);
         bullets.put(bulletNumber, temp);
         bulletNumber ++;
     }
+
+    /**
+     * Moves each of bullets currently existing on arena by magnitude of 5
+     *
+     * Use {@link #interactionOfBullet(List, Targets, HashMap, HashMap, double, double)}
+     * to check if moved bulled ceased to exist and what consequences it had
+     *
+     * @param oTargets
+     * Object that has specifications of every target currently on arena
+     * @param oWalls
+     * Object that has specifications of every wall currently on arena
+     * @param posX
+     * Current position X of player on arena
+     * @param posY
+     * Current position Y of player on arena
+     */
 
     public void moveBullets( Targets oTargets, Walls oWalls, double posX, double posY) {
         HashMap<Integer, List<Double>> targetsPos = oTargets.returnTargetsPos();
@@ -42,7 +75,7 @@ public class Bullets {
             temp.add(angle);
             temp.add(bulletSpecs.get(3));
 
-            if (!interactionOfBullet(temp, bullet, oTargets, targetsPos, oWalls, wallsPos, posX, posY, arena)) {
+            if (!interactionOfBullet(temp, oTargets, targetsPos, wallsPos, posX, posY)) {
                 bullets.put(bullet, temp);
             } else {
                 toDelete.add(bullet);
@@ -54,9 +87,27 @@ public class Bullets {
         }
     }
 
-    public boolean interactionOfBullet(List<Double> bulletSpecs, Integer bullet, Targets oTargets,
-                                       HashMap<Integer, List<Double>> targetsPos, Walls oWalls,
-                                       HashMap<Integer, List<Double>> wallsPos, double posX, double posY, Arena arena){
+    /**
+     * Checks whenever bullet does interact with objects on arena such as walls, player or boundaries
+     *
+     * @param bulletSpecs
+     * Specification of currently checked bullet
+     * @param oTargets
+     * Object that has specifications of every target currently on arena
+     * @param targetsPos
+     * List of positions for every target on arena
+     * @param wallsPos
+     * List of positions for every wall on arena
+     * @param posX
+     * Current position X of player
+     * @param posY
+     * Current position Y of player
+     * @return {boolean}
+     * True if interaction happened, otherwise false
+     */
+    public boolean interactionOfBullet(List<Double> bulletSpecs, Targets oTargets,
+                                       HashMap<Integer, List<Double>> targetsPos,
+                                       HashMap<Integer, List<Double>> wallsPos, double posX, double posY){
         boolean didInteract = false;
         Double bX = bulletSpecs.get(0);
         Double bY = bulletSpecs.get(1);
@@ -104,6 +155,11 @@ public class Bullets {
         return didInteract;
     }
 
+    /**
+     * Encapsulation of private data
+     * @return {HashMap<Integer, List<Double>>}
+     * Map of current bullets on arena
+     */
     public HashMap<Integer, List<Double>> returnBullets(){
         return bullets;
     }
