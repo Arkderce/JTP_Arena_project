@@ -47,23 +47,47 @@ public class Arena {
     double oldT = 0;
     double level = 0;
 
-
+    /**
+     * Returns current armor value.
+     *
+     */
     public int getArmor() {
         return armor;
     }
 
+    /**
+     * Sets current armor value.
+     *
+     * @param armor current armor value
+     */
     public void setArmor(int armor) {
-        this.armor = armor;
-        arenaController.changeArmor(armor);
+        if(health>0) {
+            if (armor != 100)
+                arenaController.writeOut("You have been hit for : " + (int) (getArmor() - armor) + " armor");
+            this.armor = armor;
+            arenaController.changeArmor(armor);
+        }
     }
 
+    /**
+     * Returns current health value.
+     *
+     */
     public double getHealth() {
         return health;
     }
 
+    /**
+     * Sets current health value.
+     *
+     * @param health current health value
+     */
     public void setHealth(double health) {
-        this.health = health;
-        arenaController.changeHealth(health);
+        if(health>0) {
+            arenaController.writeOut("You have been hit for : " + (int) (getHealth() - health) + " health");
+        }
+            this.health = health;
+            arenaController.changeHealth(health);
     }
 
     boolean running, goNorth, goSouth, goEast, goWest;
@@ -101,6 +125,7 @@ public class Arena {
         oWalls.createWalls(Wi, He);
         wallsPos = oWalls.returnWalls();
 
+
         theStage.setOnMouseMoved(event -> {
             if(health > 0) {
                 mposX = (int) event.getX();
@@ -135,27 +160,27 @@ public class Arena {
                 }
             }
         });
-            theStage.setOnKeyReleased(event -> {
-                if (health > 0) {
-                    switch (event.getCode()) {
-                        case W:
-                            goNorth = false;
-                            break;
-                        case S:
-                            goSouth = false;
-                            break;
-                        case A:
-                            goWest = false;
-                            break;
-                        case D:
-                            goEast = false;
-                            break;
-                        case SHIFT:
-                            running = false;
-                            break;
-                    }
+        theStage.setOnKeyReleased(event -> {
+            if (health > 0) {
+                switch (event.getCode()) {
+                    case W:
+                        goNorth = false;
+                        break;
+                    case S:
+                        goSouth = false;
+                        break;
+                    case A:
+                        goWest = false;
+                        break;
+                    case D:
+                        goEast = false;
+                        break;
+                    case SHIFT:
+                        running = false;
+                        break;
                 }
-            });
+            }
+        });
 
 
         final long startNanoTime = System.nanoTime();
@@ -194,6 +219,8 @@ public class Arena {
                 }
                 else {
                     gc.drawImage( gameover, 370, 350);
+                    arenaController.button.setDisable(false);
+                    arenaController.button.setManaged(true);
                 }
                 drawWalls(gc);
 
@@ -293,6 +320,12 @@ public class Arena {
         }
     }
 
+    /**
+     * Moves player by given coordinates.
+     *
+     * @param x value added to x position
+     * @param y value added to y position
+     */
     private void movePlayer(double x, double y){
         double newposX = x+posX;
         double newposY = y+posY;
@@ -348,6 +381,9 @@ public class Arena {
         return isWithinA;
     }
 
+    /**
+     * Sets controller for GUI manipulation.
+     */
     public void setController(ArenaController arenaController) {
         this.arenaController = arenaController;
     }

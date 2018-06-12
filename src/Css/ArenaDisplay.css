@@ -1,0 +1,13 @@
+.back{
+    -fx-background-color: black;
+}
+.button1{
+    -fx-opacity: 0.6;
+}
+.button1:hover{
+
+    -fx-opacity: 5;
+}
+.button1:pressed {
+    -fx-opacity: 0.6;
+}
