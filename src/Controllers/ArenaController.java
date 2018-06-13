@@ -61,6 +61,8 @@ public class ArenaController {
         canvas.setFocusTraversable(true);
         progressBarHealth.setProgress(arena.getHealth()*0.01);
         textArea.setEditable(false);
+        progressBarHealth.setStyle("-fx-accent: green;");
+        progressBarArmor.setStyle("-fx-accent: navy;");
     }
 
     /**
@@ -84,7 +86,18 @@ public class ArenaController {
         Platform.runLater(() -> {
         if (value >= 0 && value <= 100) {
             progressBarHealth.setProgress(value*0.01);
+            if (value >= 50 && value <= 75) {
+                progressBarHealth.setStyle("-fx-accent: yellow;");
 
+            }
+            if (value >= 25 && value <= 50) {
+                progressBarHealth.setStyle("-fx-accent: orange;");
+
+            }
+            if (value >= 0 && value <= 25) {
+                progressBarHealth.setStyle("-fx-accent: red;");
+
+            }
         } else {
             progressBarHealth.setProgress(0);
         }
@@ -100,6 +113,18 @@ public class ArenaController {
         Platform.runLater(() -> {
         if (value >= 0 && value <= 100) {
             progressBarArmor.setProgress(value*0.01);
+            if (value >= 50 && value <= 75) {
+                progressBarArmor.setStyle("-fx-accent: mediumblue;");
+
+            }
+            if (value >= 25 && value <= 50) {
+                progressBarArmor.setStyle("-fx-accent: dodgerblue;");
+
+            }
+            if (value >= 0 && value <= 25) {
+                progressBarArmor.setStyle("-fx-accent: deepskyblue;");
+
+            }
         }
         });
     }

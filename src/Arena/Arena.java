@@ -121,7 +121,7 @@ public class Arena {
             background = new Image(getClass().getResource("/resources/background.png").toURI().toString());
             player = new Image(getClass().getResource("/resources/player.png").toURI().toString());
             target = new Image(getClass().getResource("/resources/target.png").toURI().toString());
-            gun = new Image(getClass().getResource("/resources/gunv2.png").toURI().toString());
+            gun = new Image(getClass().getResource("/resources/gunv3.png").toURI().toString());
             bulletEnemy = new Image(getClass().getResource("/resources/bullet.png").toURI().toString());
             bulletOwn = new Image(getClass().getResource("/resources/bulletown.png").toURI().toString());
             crosshair = new Image(getClass().getResource("/resources/crosshair.png").toURI().toString());
@@ -223,7 +223,7 @@ public class Arena {
                 double vectorY = Math.sin((angle+90)*(Math.PI/180.0)) ;
                 double vectorX = Math.cos((angle+90)*(Math.PI/180.0)) ;
                 if(health > 0){
-                    drawRotatedImage(gc, gun, angle, posX-10,   posY-10);
+                    drawRotatedImage(gc, gun, angle, posX-25,   posY-25);
                     gc.drawImage( player , posX, posY );
                     gc.drawImage( crosshair , (posX + 17) + vectorX * 100, (posY + 17) + vectorY * 100);
                 }
