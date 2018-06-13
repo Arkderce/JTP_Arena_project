@@ -12,6 +12,9 @@ public class MainController {
     @FXML
     Group mainGroup;
 
+    /**
+     * Initializes main window of the application and displays menu on it.
+     */
     @FXML
     public void initialize(){
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/Fxml/Menu.fxml"));

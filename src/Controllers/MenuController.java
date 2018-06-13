@@ -46,11 +46,19 @@ public class MenuController {
         }
         mainController.setMainGroup(anchorPane);
     }
+
+    /**
+     *Gets directions where the mouse was pressed.
+     */
     @FXML
     void pressed(MouseEvent event) {
         x = event.getSceneX();
         y = event.getSceneY();
     }
+
+    /**
+     *Gets directions where the mouse was moved.
+     */
     @FXML
     void dragged(MouseEvent event) {
         Node node = (Node) event.getSource();
@@ -61,6 +69,8 @@ public class MenuController {
 
     /**
      * Sets controller for GUI manipulation.
+     *
+     * @param mainController given contoller.
      */
     public void setMainController(MainController mainController) {
         this.mainController = mainController;

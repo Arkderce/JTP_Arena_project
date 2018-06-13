@@ -50,6 +50,7 @@ public class Arena {
     /**
      * Returns current armor value.
      *
+     * @return current armor value.
      */
     public int getArmor() {
         return armor;
@@ -72,6 +73,7 @@ public class Arena {
     /**
      * Returns current health value.
      *
+     * @return current health value
      */
     public double getHealth() {
         return health;
@@ -455,6 +457,8 @@ public class Arena {
 
     /**
      * Sets controller for GUI manipulation.
+     *
+     * @param arenaController given controller
      */
     public void setController(ArenaController arenaController) {
         this.arenaController = arenaController;
