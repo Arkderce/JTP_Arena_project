@@ -8,7 +8,7 @@
    <children>
       <AnchorPane onMouseDragged="#dragged" onMousePressed="#pressed" prefHeight="1000.0" prefWidth="1200.0" styleClass="back">
          <children>
-            <Button id="playButton" fx:id="button1" layoutX="567.0" layoutY="357.0" mnemonicParsing="false" onAction="#play" prefHeight="49.0" prefWidth="104.0" styleClass="button1" text="Graj" AnchorPane.leftAnchor="567.0" AnchorPane.rightAnchor="563.0" AnchorPane.topAnchor="357.0" />
+            <Button id="playButton" fx:id="button1" layoutX="567.0" layoutY="357.0" mnemonicParsing="false" onAction="#play" prefHeight="49.0" prefWidth="104.0" styleClass="button1" text="Go" AnchorPane.leftAnchor="567.0" AnchorPane.rightAnchor="563.0" AnchorPane.topAnchor="357.0" />
             <Button id="stopButton" fx:id="button2" layoutX="539.0" layoutY="714.0" mnemonicParsing="false" onAction="#exit" prefHeight="58.0" prefWidth="134.0" styleClass="button2" text="Wyjdź" AnchorPane.leftAnchor="536.0" AnchorPane.rightAnchor="530.0" AnchorPane.topAnchor="714.0" />
          </children>
          <effect>
