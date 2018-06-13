@@ -66,6 +66,7 @@ public class Targets {
 
     /**
      * Sets controller for GUI manipulation.
+     * @param arenaController given controller
      */
     public void setController(ArenaController arenaController) {
         this.arenaController = arenaController;

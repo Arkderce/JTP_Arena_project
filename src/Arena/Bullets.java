@@ -45,7 +45,7 @@ public class Bullets {
     /**
      * Moves each of bullets currently existing on arena by magnitude of 5
      *
-     * Use {@link #interactionOfBullet(List, Targets, HashMap, HashMap, double, double)}
+     * Use  interactionOfBullet(List, Targets, HashMap, HashMap, double, double)
      * to check if moved bulled ceased to exist and what consequences it had
      *
      * @param oTargets
@@ -157,8 +157,7 @@ public class Bullets {
 
     /**
      * Encapsulation of private data
-     * @return {HashMap<Integer, List<Double>>}
-     * Map of current bullets on arena
+     * @return map of current bullets on arena
      */
     public HashMap<Integer, List<Double>> returnBullets(){
         return bullets;

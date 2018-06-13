@@ -69,6 +69,8 @@ public class MenuController {
 
     /**
      * Sets controller for GUI manipulation.
+     *
+     * @param mainController given contoller.
      */
     public void setMainController(MainController mainController) {
         this.mainController = mainController;
